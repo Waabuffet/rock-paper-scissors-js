@@ -61,6 +61,11 @@ class Bot {
     }
 
     display() {
-        image(this.img, this.position.x - (this.size / 2), this.position.y - (this.size / 2), this.size, this.size);
+        push();
+        translate(this.position.x, this.position.y);
+        rotate(this.velocity.heading() + radians(90));
+        imageMode(CENTER);
+        image(this.img, 0, 0, this.size, this.size);
+        pop();
     }
 }
