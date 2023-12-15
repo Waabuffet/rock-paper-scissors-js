@@ -1,16 +1,15 @@
 class Bot {
-    constructor(x, y, size, powers, powerImages, wBoudary, hBoudary) {
+    constructor(x, y, size, powers, powerImages, wBoudary, hBoudary, whichPower) {
         this.position = new p5.Vector(x, y);
         this.velocity = p5.Vector.random2D();
         this.velocity.mult(3);
         this.size = size;
         this.r = size / 2;
-        this.m = r * 0.1;
+        this.m = this.r * 0.1;
         this.powers = powers;
         this.powerImages = powerImages;
-        var r = Math.floor(random(powers.length));
-        this.power = powers[r];
-        this.img = powerImages[r];
+        this.power = powers[whichPower];
+        this.img = powerImages[whichPower];
         this.wBoudary = wBoudary;
         this.hBoudary = hBoudary;
     }
