@@ -4,6 +4,7 @@ class Bot {
         this.velocity = p5.Vector.random2D();
         this.velocity.mult(3);
         this.size = size;
+        this.r = size / 2;
         this.m = r * 0.1;
         this.powers = powers;
         this.powerImages = powerImages;
