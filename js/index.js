@@ -25,7 +25,6 @@ function setup() {
     for (var i = 0; i < bots_real_count; i++) {
         bots.push(new Bot(random(windowWidth - margin), random(windowHeight - margin - (rect_height * 3)), bot_size, powers, powerImages, windowWidth - margin, windowHeight - margin - (rect_height * 3), getInitPower(), speed));
     }
-    console.log('done')
 }
 
 function getInitPower(){
