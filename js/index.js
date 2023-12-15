@@ -1,5 +1,6 @@
 var bots_count = 50;
 var bot_size = 40;
+var speed = 3;
 
 
 var bots = [];
@@ -22,7 +23,7 @@ function setup() {
 
     bots_real_count = initPowers.rock + initPowers.paper + initPowers.scissors;
     for (var i = 0; i < bots_real_count; i++) {
-        bots.push(new Bot(random(windowWidth - margin), random(windowHeight - margin - (rect_height * 3)), bot_size, powers, powerImages, windowWidth - margin, windowHeight - margin - (rect_height * 3), getInitPower()));
+        bots.push(new Bot(random(windowWidth - margin), random(windowHeight - margin - (rect_height * 3)), bot_size, powers, powerImages, windowWidth - margin, windowHeight - margin - (rect_height * 3), getInitPower(), speed));
     }
     console.log('done')
 }
