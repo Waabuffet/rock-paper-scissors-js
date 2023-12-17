@@ -1,7 +1,7 @@
-var bots_count = 50;
-var bot_size = 40;
-var speed = 3;
-
+var bots_count = 100;
+var bot_size = 30;
+var speed = 4;
+var auto_restart = true;
 
 var bots = [];
 var powers = ['rock', 'paper', 'scissors'];
@@ -16,6 +16,7 @@ var gameOver = false;
 var winner = '';
 var margin = 20;
 var bots_real_count = 0;
+var gameOverTimer = 0;
 
 function setup() {
     createCanvas(windowWidth - margin, windowHeight - margin);
@@ -27,11 +28,25 @@ function setup() {
     }
 }
 
-function getInitPower(){
+function restart() {
+    initPowers = {
+        rock: Math.floor(bots_count / 3),
+        paper: Math.floor(bots_count / 3),
+        scissors: Math.floor(bots_count / 3),
+    }
+    bots = [];
+    for (var i = 0; i < bots_real_count; i++) {
+        bots.push(new Bot(random(windowWidth - margin), random(windowHeight - margin - (rect_height * 3)), bot_size, powers, powerImages, windowWidth - margin, windowHeight - margin - (rect_height * 3), getInitPower(), speed));
+    }
+    gameOver = false;
+    gameOverTimer = 0;
+}
+
+function getInitPower() {
     var whichPowerIndex = Math.floor(random(Object.keys(initPowers).length));
     var whichPower = Object.keys(initPowers)[whichPowerIndex];
     initPowers[whichPower]--;
-    if(initPowers[whichPower] == 0){
+    if (initPowers[whichPower] == 0) {
         delete initPowers[whichPower];
     }
     return whichPowerIndex;
@@ -66,11 +81,18 @@ function draw() {
         }
     }
 
-    if(gameOver){
+    if (gameOver) {
         fill(255);
         textSize(100);
         textAlign(CENTER);
         text("Winner is " + winner, (windowWidth - margin) / 2, (windowHeight - margin) / 2);
+
+        if (auto_restart) {
+            gameOverTimer++;
+            if (gameOverTimer >= 300) {
+                restart();
+            }
+        }
     }
 
     fill(255, 0, 0);
@@ -85,7 +107,7 @@ function draw() {
 
 function getRectWidth(value, who) {
     var per = value * 100 / bots_real_count;
-    if(per == 100){
+    if (per == 100) {
         gameOver = true;
         winner = who;
     }
